@@ -1,0 +1,76 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Seeder;
+
+class BooksTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+         $books = [
+            [
+                'title' => "Harry Potter and the Sorcerer's Stone",
+                'author' => 'J.K. Rowling',
+                'publisher' => 'Bloomsbury',
+                'year' => 1997,
+                'stock' => 10,
+                'category_id' => 5, // Children
+                'description' => 'A fantasy story for young readers about the magical world of Harry Potter.',
+                'image' => null,
+            ],
+            [
+                'title' => 'The Great Gatsby',
+                'author' => 'F. Scott Fitzgerald',
+                'publisher' => 'Scribner',
+                'year' => 1925,
+                'stock' => 5,
+                'category_id' => 1, // Fiction
+                'description' => 'Classic novel depicting life in 1920s America.',
+                'image' => null,
+            ],
+            [
+                'title' => 'Sapiens: A Brief History of Humankind',
+                'author' => 'Yuval Noah Harari',
+                'publisher' => 'Harper',
+                'year' => 2011,
+                'stock' => 8,
+                'category_id' => 2, // Non-fiction
+                'description' => 'History of humankind from ancient to modern times.',
+                'image' => null,
+            ],
+            [
+                'title' => 'A Brief History of Time',
+                'author' => 'Stephen Hawking',
+                'publisher' => 'Bantam Books',
+                'year' => 1988,
+                'stock' => 6,
+                'category_id' => 3, // Science
+                'description' => 'Explains the fundamental concepts of cosmology for general readers.',
+                'image' => null,
+            ],
+            [
+                'title' => 'The Diary of a Young Girl',
+                'author' => 'Anne Frank',
+                'publisher' => 'Contact Publishing',
+                'year' => 1947,
+                'stock' => 4,
+                'category_id' => 4, // Biography
+                'description' => 'The diary of Anne Frank during the Holocaust.',
+                'image' => null,
+            ],
+        ];
+
+        foreach ($books as $book) {
+            DB::table('books')->insert(array_merge($book, [
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]));
+        }
+    }
+}
