@@ -30,7 +30,7 @@ class BooksTableSeeder extends Seeder
                 'publisher' => 'Scribner',
                 'year' => 1925,
                 'stock' => 5,
-                'category_id' => 1, // Fiction
+                'category_id' => 1,
                 'description' => 'Classic novel depicting life in 1920s America.',
                 'image' => null,
             ],
@@ -40,7 +40,7 @@ class BooksTableSeeder extends Seeder
                 'publisher' => 'Harper',
                 'year' => 2011,
                 'stock' => 8,
-                'category_id' => 2, // Non-fiction
+                'category_id' => 2, 
                 'description' => 'History of humankind from ancient to modern times.',
                 'image' => null,
             ],
@@ -50,7 +50,7 @@ class BooksTableSeeder extends Seeder
                 'publisher' => 'Bantam Books',
                 'year' => 1988,
                 'stock' => 6,
-                'category_id' => 3, // Science
+                'category_id' => 3, 
                 'description' => 'Explains the fundamental concepts of cosmology for general readers.',
                 'image' => null,
             ],
@@ -60,7 +60,7 @@ class BooksTableSeeder extends Seeder
                 'publisher' => 'Contact Publishing',
                 'year' => 1947,
                 'stock' => 4,
-                'category_id' => 4, // Biography
+                'category_id' => 4,
                 'description' => 'The diary of Anne Frank during the Holocaust.',
                 'image' => null,
             ],
