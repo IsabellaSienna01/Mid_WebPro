@@ -71,7 +71,7 @@
 
     <div class="flex gap-4 mt-6">
         <a href="{{ route('user.books.index') }}" class="bg-indigo-600 text-white px-4 py-2 rounded-xl hover:bg-indigo-700 transition">📘 Lihat Daftar Buku</a>
-        <a href="{{ route('user.histories.index') }}" class="bg-green-600 text-white px-4 py-2 rounded-xl hover:bg-green-700 transition">📄 Riwayat</a>
+        <a href="{{ route('user.histories') }}" class="bg-green-600 text-white px-4 py-2 rounded-xl hover:bg-green-700 transition">📄 Riwayat</a>
         <a href="{{ route('user.profile') }}" class="bg-gray-600 text-white px-4 py-2 rounded-xl hover:bg-gray-700 transition">👤 Profil</a>
     </div>
 

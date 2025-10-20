@@ -19,7 +19,10 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->prefix('user')->name('user.')->group(function () {
     Route::get('/dashboard', [UserDashboard::class, 'index'])->name('dashboard');
-    Route::view('/books', 'user.books.index')->name('books');
+    Route::view('/books', 'user.books.index')->name('books.index');
+    Route::get('/books/{id}', [UserDashboard::class, 'detail'])->name('books.detail');
+    Route::get('/histories', [UserDashboard::class, 'histories'])->name('histories');
+    Route::get('/profile', [UserDashboard::class, 'profile'])->name('profile');
 });
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {

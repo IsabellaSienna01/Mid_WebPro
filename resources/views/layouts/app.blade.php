@@ -6,7 +6,7 @@
     <title>{{ $title ?? 'Library' }}</title>
     @vite('resources/css/app.css')
 </head>
-<body class="">
+<body class="pt-16">
     @include('layouts.navbar')
 
     <main class="container mx-auto px-6 py-10">

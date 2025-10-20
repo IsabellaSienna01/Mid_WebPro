@@ -48,12 +48,11 @@ class AuthController extends Controller
     return redirect()->route('user.dashboard');
     }
 
-
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email'    => 'required|email',
-            'password' => 'required',
+            'email'    => ['required', 'email'],
+            'password' => ['required'],
         ]);
 
         if (Auth::attempt($credentials)) {
@@ -65,7 +64,7 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'Email atau password salah.',
+            'email' => 'Wrong email or password',
         ]);
     }
 
