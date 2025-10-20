@@ -15,8 +15,8 @@ class DashboardController extends Controller
         ];
 
         $recentHistories = [
-            (object) ['book' => (object)['title' => 'Algoritma Pemrograman'], 'borrow_date' => '2025-10-10', 'return_date' => null, 'status' => 'dipinjam'],
-            (object) ['book' => (object)['title' => 'Struktur Data'], 'borrow_date' => '2025-09-22', 'return_date' => '2025-10-02', 'status' => 'dikembalikan'],
+            (object) ['book' => (object)['title' => 'Algoritma Pemrograman'], 'borrow_date' => '2025-10-10', 'return_date' => null, 'status' => 'borrowed'],
+            (object) ['book' => (object)['title' => 'Struktur Data'], 'borrow_date' => '2025-09-22', 'return_date' => '2025-10-02', 'status' => 'returned'],
         ];
 
         return view('user.dashboard', compact('recommendedBooks', 'recentHistories'));
