@@ -1,8 +1,18 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
 <div class="flex justify-center items-center min-h-screen bg-gray-100">
     <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
+        
+        <div class="mb-4">
+            <a href="{{ url('/') }}" class="inline-flex items-center text-sm text-gray-600 hover:text-blue-600 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+                Kembali
+            </a>
+        </div>
+        
         <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Daftar Akun Baru</h2>
 
         @if ($errors->any())
@@ -14,7 +24,7 @@
                 </ul>
             </div>
         @endif
-}
+
         <form method="POST" action="{{ route('register') }}" class="space-y-5">
             @csrf
 
