@@ -7,14 +7,14 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class LoginsTableSeeder extends Seeder
+class usersCredTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-         $users = [
+        $users = [
             ['name' => 'Admin', 'email' => 'admin@library.com', 'password' => 'admin123', 'role' => 'admin'],
 
 
@@ -27,7 +27,7 @@ class LoginsTableSeeder extends Seeder
         ];
 
         foreach ($users as $user) {
-            DB::table('logins')->insert([
+            DB::table('users_cred')->insert([
                 'name' => $user['name'],
                 'email' => $user['email'],
                 'password' => Hash::make($user['password']),

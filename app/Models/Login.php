@@ -11,7 +11,7 @@ class Login extends Model implements AuthenticatableContract
 {
     use Authenticatable;
 
-    protected $table = 'logins';
+    protected $table = 'users_cred';
     protected $primaryKey = 'id';
     public $incrementing = true;
     protected $keyType = 'int';
