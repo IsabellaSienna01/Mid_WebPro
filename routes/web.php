@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\User\BookController;
+use App\Http\Controllers\User\HistoryController;
+use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\AuthController;
@@ -19,10 +22,10 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->prefix('user')->name('user.')->group(function () {
     Route::get('/dashboard', [UserDashboard::class, 'index'])->name('dashboard');
-    Route::view('/books', 'user.books.index')->name('books.index');
+    Route::get('/books', [BookController::class, 'index'])->name('books.index');
     Route::get('/books/{id}', [UserDashboard::class, 'detail'])->name('books.detail');
-    Route::get('/histories', [UserDashboard::class, 'histories'])->name('histories');
-    Route::get('/profile', [UserDashboard::class, 'profile'])->name('profile');
+    Route::get('/histories', [HistoryController::class, 'index'])->name('histories');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 });
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {

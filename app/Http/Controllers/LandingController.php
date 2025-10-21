@@ -9,7 +9,7 @@ class LandingController extends Controller
 {
     public function index()
     {
-        $books = Book::latest()->take(8)->get();
+        $books = Book::latest()->take(4)->get();
         return view('landing.index', compact('books'));
     }
 
