@@ -52,18 +52,19 @@
             <li><a href="{{ route ('admin.dashboard') }} " class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">
                 Dashboard
             </a></li>
-            <li><a href="#" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">
+            <li><a href="{{ route ('admin.categories.index') }}" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">
                 Categories
             </a></li>
             <li><a href="{{ route ('admin.books') }}" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">
                 Books
             </a></li>
+            <li><a href="{{ route('admin.members.index') }}" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">
+                Members
+            </a></li>
             <li><a href="#" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">
                 Borrows
             </a></li>
-            <li><a href="#" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">
-                Members
-            </a></li>
+
             <li>
             <form method="POST" action="{{ route('logout') }}" class="inline">
             @csrf

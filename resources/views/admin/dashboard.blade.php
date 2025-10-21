@@ -2,88 +2,99 @@
 <title>Dashboard</title>
 
 @section('content')
-<div class="p-6 bg-gray-50 min-h-screen">
+<div class="p-4 sm:p-6 bg-gray-50 min-h-screen space-y-6">
 
-    <div class="mb-6">
-        <h1 class="text-2xl font-bold text-gray-800">Welcome back, {{ Auth::user()->name }}</h1>
-        <p class="text-gray-600 mt-1">Here’s an overview of the library’s current status.</p>
+    <div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-gray-800">Welcome back, {{ Auth::user()->name }}</h1>
+        <p class="text-gray-600 mt-1 sm:mt-2 text-sm sm:text-base">Here’s an overview of the library’s current status.</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-        <div class="bg-white p-4 rounded-2xl shadow">
-            <h2 class="text-gray-500 text-sm">Total Books</h2>
-            <p class="text-3xl font-semibold text-indigo-600">{{ $stats['books'] }}</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+        <div class="bg-white p-4 sm:p-6 rounded-2xl shadow hover:shadow-lg transition">
+            <h2 class="text-gray-500 text-xs sm:text-sm">Total Books</h2>
+            <p class="text-2xl sm:text-3xl font-bold text-indigo-600 mt-1 sm:mt-2">{{ $stats['books'] }}</p>
         </div>
-        <div class="bg-white p-4 rounded-2xl shadow">
-            <h2 class="text-gray-500 text-sm">Total Members</h2>
-            <p class="text-3xl font-semibold text-green-600">{{ $stats['members'] }}</p>
+        <div class="bg-white p-4 sm:p-6 rounded-2xl shadow hover:shadow-lg transition">
+            <h2 class="text-gray-500 text-xs sm:text-sm">Total Members</h2>
+            <p class="text-2xl sm:text-3xl font-bold text-green-600 mt-1 sm:mt-2">{{ $stats['members'] }}</p>
         </div>
-        <div class="bg-white p-4 rounded-2xl shadow">
-            <h2 class="text-gray-500 text-sm">Books Borrowed</h2>
-            <p class="text-3xl font-semibold text-yellow-600">{{ $stats['borrowed'] }}</p>
+        <div class="bg-white p-4 sm:p-6 rounded-2xl shadow hover:shadow-lg transition">
+            <h2 class="text-gray-500 text-xs sm:text-sm">Books Borrowed</h2>
+            <p class="text-2xl sm:text-3xl font-bold text-yellow-600 mt-1 sm:mt-2">{{ $stats['borrowed'] }}</p>
         </div>
-        <div class="bg-white p-4 rounded-2xl shadow">
-            <h2 class="text-gray-500 text-sm">Books Returned</h2>
-            <p class="text-3xl font-semibold text-blue-600">{{ $stats['returned'] }}</p>
+        <div class="bg-white p-4 sm:p-6 rounded-2xl shadow hover:shadow-lg transition">
+            <h2 class="text-gray-500 text-xs sm:text-sm">Books Returned</h2>
+            <p class="text-2xl sm:text-3xl font-bold text-blue-600 mt-1 sm:mt-2">{{ $stats['returned'] }}</p>
         </div>
     </div>
 
-    <div class="mb-8">
-        <h2 class="text-xl font-bold text-gray-800 mb-4">Recent Loan Activities</h2>
-        <table class="w-full bg-white rounded-2xl shadow overflow-hidden">
+    <div class="bg-white p-4 sm:p-6 rounded-2xl shadow overflow-x-auto">
+        <h2 class="text-lg sm:text-xl font-bold text-gray-800 mb-2 sm:mb-4">Recent Loan Activities</h2>
+        <table class="w-full table-auto text-left border-collapse text-xs sm:text-sm">
             <thead class="bg-gray-100 text-gray-700">
                 <tr>
-                    <th class="text-left p-3">Member</th>
-                    <th class="text-left p-3">Books</th>
-                    <th class="text-left p-3">Loan Date</th>
-                    <th class="text-left p-3">Return Date</th>
-                    <th class="text-left p-3">Status</th>
+                    <th class="p-2 sm:p-3">Member</th>
+                    <th class="p-2 sm:p-3">Books</th>
+                    <th class="p-2 sm:p-3">Loan Date</th>
+                    <th class="p-2 sm:p-3">Return Date</th>
+                    <th class="p-2 sm:p-3">Status</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($recentActivities as $activity)
-                    <tr class="border-b">
-                        <td class="p-3 font-medium">{{ $activity->member->login->name ?? '-' }}</td>
-                        <td class="p-3">
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="p-2 sm:p-3 font-medium">{{ $activity->member->login->name ?? '-' }}</td>
+                        <td class="p-2 sm:p-3">
                             @foreach ($activity->loanDetails as $detail)
-                                <div class="text-sm text-gray-700">📘 {{ $detail->book->title ?? '-' }}</div>
+                                <div class="text-gray-700 text-xs sm:text-sm">{{ $detail->book->title ?? '-' }}</div>
                             @endforeach
                         </td>
-                        <td class="p-3 text-gray-700">{{ $activity->loan_date->format('d M Y') }}</td>
-                        <td class="p-3 text-gray-700">{{ $activity->return_date ? $activity->return_date->format('d M Y') : '-' }}</td>
-                        <td class="p-3">
-                                @php
-                                    $status = $activity->status ?? 'unknown';
-                                @endphp
-                            <span class="px-2 py-1 text-sm rounded-xl 
-                            @switch($status)
-                                @case('borrowed') bg-yellow-100 text-yellow-700 @break
-                                @case('returned') bg-green-100 text-green-700 @break
-                                @default bg-red-100 text-red-700
-                            @endswitch">
+                        <td class="p-2 sm:p-3 text-gray-700">{{ $activity->loan_date->format('d M Y') }}</td>
+                        <td class="p-2 sm:p-3 text-gray-700">{{ $activity->return_date ? $activity->return_date->format('d M Y') : '-' }}</td>
+                        <td class="p-2 sm:p-3">
+                            @php $status = $activity->status ?? 'unknown'; @endphp
+                            <span class="px-2 py-1 text-xs sm:text-sm rounded-xl 
+                                @switch($status)
+                                    @case('borrowed') bg-yellow-100 text-yellow-700 @break
+                                    @case('returned') bg-green-100 text-green-700 @break
+                                    @default bg-red-100 text-red-700
+                                @endswitch">
                                 {{ ucfirst($activity->status) }}
                             </span>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="p-4 text-center text-gray-500">No recent activities found.</td>
+                        <td colspan="5" class="p-3 sm:p-4 text-center text-gray-500">No recent activities found.</td>
                     </tr>
                 @endforelse
             </tbody>
         </table>
     </div>
 
-    <div class="flex flex-wrap gap-4 mt-6">
-        <a href="{{ route('admin.books') }}" class="bg-indigo-600 text-white px-4 py-2 rounded-xl hover:bg-indigo-700 transition">
-            Manage Books
-        </a>
-        <a href="#" class="bg-green-600 text-white px-4 py-2 rounded-xl hover:bg-green-700 transition">
-            Manage Members
-        </a>
-        <a href="#" class="bg-yellow-600 text-white px-4 py-2 rounded-xl hover:bg-yellow-700 transition">
-            View Borrow Records
-        </a>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+        @php
+            $cards = [
+                ['title'=>'Categories','color'=>'indigo','icon'=>'📂','desc'=>'Manage all book categories in the library.','route'=>route('admin.categories.index')],
+                ['title'=>'Books','color'=>'blue','icon'=>'📚','desc'=>'View and manage all books in the library.','route'=>route('admin.books')],
+                ['title'=>'Members','color'=>'teal','icon'=>'👥','desc'=>'Manage library members and their information.','route'=>route('admin.members.index')],
+                ['title'=>'Borrow Records','color'=>'yellow','icon'=>'📝','desc'=>'View all borrow and return activities.','route'=>route('admin.loans.index')],
+            ];
+        @endphp
+
+        @foreach($cards as $card)
+        <div class="bg-{{ $card['color'] }}-600 text-white p-4 sm:p-6 rounded-2xl shadow hover:shadow-xl transition flex flex-col justify-between">
+            <div class="flex flex-wrap items-center mb-2 sm:mb-4">
+                <div class="text-3xl sm:text-4xl mr-2">{{ $card['icon'] }}</div>
+                <h3 class="text-sm sm:text-lg font-bold">{{ $card['title'] }}</h3>
+            </div>
+            <p class="text-xs sm:text-sm text-white/90 mb-2 sm:mb-4">{{ $card['desc'] }}</p>
+            <a href="{{ $card['route'] }}" 
+               class="block sm:inline-block w-full sm:w-auto text-center bg-white text-{{ $card['color'] }}-600 px-3 py-2 rounded-lg font-semibold text-xs sm:text-sm hover:bg-gray-100 transition">
+               Manage
+            </a>
+        </div>
+        @endforeach
     </div>
 
 </div>

@@ -5,10 +5,6 @@
 <div class="max-w-4xl mx-auto px-6 py-8">
     <div class="flex justify-between items-center mb-6">
         <h1 class="text-2xl font-bold text-emerald-600">Edit Book</h1>
-        <a href="{{ route('admin.books') }}" 
-           class="bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-2 rounded-lg font-semibold shadow">
-            Back to List
-        </a>
     </div>
 
     @if ($errors->any())
