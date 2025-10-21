@@ -60,6 +60,14 @@
             <li><a href="/" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">
                 Members
             </a></li>
+            <li>
+            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">
+                Logout
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                @csrf
+            </form>
+            </li>
         </ul>
         @endif
     @endauth
