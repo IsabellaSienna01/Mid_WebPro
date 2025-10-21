@@ -8,6 +8,7 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\User\DashboardController as UserDashboard;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
+use App\Http\Controllers\Admin\BookController as AdminBookController;
 
 Route::get('/', [LandingController::class, 'index'])->name('landing.index');
 Route::get('/books/{id}', [LandingController::class, 'detail'])->name('landing.detail');
@@ -30,5 +31,11 @@ Route::middleware(['auth'])->prefix('user')->name('user.')->group(function () {
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('dashboard');
-    Route::view('/books', 'admin.books.index')->name('books');
+    Route::get('/books',[AdminBookController::class, 'index'])->name('books');
+    Route::get('/books/create', [AdminBookController::class, 'create'])->name('books.create');
+    Route::post('/books', [AdminBookController::class, 'store'])->name('books.store');
+    Route::get('/books/{id}/edit', [AdminBookController::class, 'edit'])->name('books.edit');
+    Route::put('/books/{id}', [AdminBookController::class, 'update'])->name('books.update');
+    Route::get('/books/{id}', [AdminBookController::class, 'show'])->name('books.show');
+    Route::delete('/books/{id}', [AdminBookController::class, 'destroy'])->name('books.destroy');
 });
