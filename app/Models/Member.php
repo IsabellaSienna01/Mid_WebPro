@@ -10,7 +10,7 @@ class Member extends Model
     public $incrementing = true;
     protected $keyType = 'int';
 
-    protected $fillable = ['user_id', 'address', 'phone', 'membership_date'];
+    protected $fillable = ['user_id', 'address', 'phone', 'membership_date', 'profile_picture'];
     protected $casts = ['membership_date' => 'date'];
 
     public function login(){

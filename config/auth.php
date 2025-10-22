@@ -59,10 +59,17 @@ return [
     |
     */
 
+    // nyoba ubah model user ke model login
+    // 'providers' => [
+    //     'users' => [
+    //         'driver' => 'eloquent',
+    //         'model' => env('AUTH_MODEL', App\Models\Login::class),
+    //     ],
+
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\Login::class),
+            'model' => App\Models\Login::class,
         ],
 
         // 'users' => [

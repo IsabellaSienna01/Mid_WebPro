@@ -25,6 +25,9 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::disableForeignKeyConstraints();
+        // drop table(s)
         Schema::dropIfExists('fines');
+        Schema::enableForeignKeyConstraints();
     }
 };

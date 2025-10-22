@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
+// use App\Models\User;
 use App\Models\Member;
+use App\Models\Login;
 
 class AuthController extends Controller
 {
@@ -22,30 +23,38 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|unique:users',
-        'password' => 'required|min:6|confirmed',
-        'address' => 'required|string|max:255',
-        'phone' => 'required|string|max:20',
-    ]);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6|confirmed',
+            'address' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+        ]);
 
-    $user = User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => Hash::make($request->password),
-        'role' => 'user',
-    ]);
+        // $user = User::create([
+        //     'name' => $request->name,
+        //     'email' => $request->email,
+        //     'password' => Hash::make($request->password),
+        //     'role' => 'user',
+        // ]);
+        
+        $user = Login::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => 'user',
+            'logged_in' => false,
+        ]);
 
-    Member::create([
-        'user_id' => $user->id,
-        'address' => $request->address,
-        'phone' => $request->phone,
-        'membership_date' => now(),
-    ]);
+        Member::create([
+            'user_id' => $user->id,
+            'address' => $request->address,
+            'phone' => $request->phone,
+            'membership_date' => now(),
+        ]);
 
-    Auth::login($user);
-    return redirect()->route('user.dashboard');
+        Auth::login($user);
+        return redirect()->route('user.dashboard');
     }
 
     public function login(Request $request)
