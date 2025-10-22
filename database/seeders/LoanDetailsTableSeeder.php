@@ -21,11 +21,6 @@ class LoanDetailsTableSeeder extends Seeder
                     'quantity' => 1,
                 ],
                 [
-                    'loan_id' => 1,
-                    'book_id' => 2,
-                    'quantity' => 2,
-                ],
-                [
                     'loan_id' => 2,
                     'book_id' => 3,
                     'quantity' => 1,

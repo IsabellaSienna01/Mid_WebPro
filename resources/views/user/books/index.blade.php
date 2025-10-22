@@ -16,6 +16,15 @@
 			</div>
 			@endforeach
 		</div>
+		<br>
 	</main>
-
+	<br>
+	<div>
+		<p class="text-gray-500 mt-5 text-center">
+			Can't find the book you're looking for?
+			<a href="{{ route('user.book.request') }}" class="text-emerald-500 font-semibold hover:underline">
+				Let us know!
+			</a>
+		</p>
+	</div>
 @endsection

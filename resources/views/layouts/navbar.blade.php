@@ -17,6 +17,9 @@
             <li><a href="{{ route('user.histories') }}" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">
                 Histories
             </a></li>
+            <li><a href="{{ route('user.book.request') }}" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">
+                Request Book
+            </a></li>
             <li class="relative group">
                 <button class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3 flex items-center">
                     Profile

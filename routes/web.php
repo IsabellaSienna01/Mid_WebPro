@@ -11,6 +11,10 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\User\DashboardController as UserDashboard;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
+use App\Http\Controllers\Admin\BookController as AdminBookController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\MemberController;
+use App\Http\Controllers\Admin\LoanController;
 
 Route::get('/', [LandingController::class, 'index'])->name('landing.index');
 Route::get('/book-detail/{id}', [LandingController::class, 'detail'])->name('landing.detail');
@@ -23,7 +27,7 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.po
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::middleware(['auth'])->prefix('user')->name('user.')->group(function () {
+Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(function () {
     Route::get('/dashboard', [UserDashboard::class, 'index'])->name('dashboard');
     Route::get('/books', [BookController::class, 'index'])->name('books.index');
     Route::get('/book-detail/{id}', [BookDetailController::class, 'detail'])->name('book.detail');
@@ -33,9 +37,34 @@ Route::middleware(['auth'])->prefix('user')->name('user.')->group(function () {
     Route::get('/request-book', [RequestController::class, 'index'])->name('book.request');
     Route::post('/request-book', [RequestController::class, 'store'])->name('book.request.store');
     Route::put('/book-detail/{id}', [UserLoan::class, 'return'])->name('book.return');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('dashboard');
-    Route::view('/books', 'admin.books.index')->name('books');
+    Route::get('/books',[AdminBookController::class, 'index'])->name('books');
+    Route::get('/books/create', [AdminBookController::class, 'create'])->name('books.create');
+    Route::post('/books', [AdminBookController::class, 'store'])->name('books.store');
+    Route::get('/books/{id}/edit', [AdminBookController::class, 'edit'])->name('books.edit');
+    Route::put('/books/{id}', [AdminBookController::class, 'update'])->name('books.update');
+    Route::get('/books/{id}', [AdminBookController::class, 'show'])->name('books.show');
+    Route::delete('/books/{id}', [AdminBookController::class, 'destroy'])->name('books.destroy');
+
+
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+    Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+    Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+
+
+    Route::get('/members', [MemberController::class, 'index'])->name('members.index');
+    Route::get('/members/{member}/edit', [MemberController::class, 'edit'])->name('members.edit');
+    Route::put('/members/{member}', [MemberController::class, 'update'])->name('members.update');
+    Route::delete('/members/{member}', [MemberController::class, 'destroy'])->name('members.destroy');
+
+    Route::get('loans', [App\Http\Controllers\Admin\LoanController::class, 'index'])->name('loans.index');
+    Route::get('fines/{fine}/edit', [LoanController::class, 'editFine'])->name('loans.edit');
+    Route::put('fines/{fine}', [LoanController::class, 'updateFine'])->name('loans.update');
+
 });
