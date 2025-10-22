@@ -36,18 +36,16 @@
                         <td class="px-4 py-3 text-gray-700">{{ $member->address ?? '-' }}</td>
                         <td class="px-4 py-3 text-gray-700">{{ $member->membership_date->format('d-m-Y') }}</td>
                         <td class="px-4 py-3 text-center flex flex-col sm:flex-row justify-center items-center gap-2">
-                            <a href="{{ route('admin.members.edit', $member->id) }}"
-                               class="inline-block bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded-lg text-xs sm:text-sm">
-                                Edit
-                            </a>
-                            <form action="{{ route('admin.members.destroy', $member->id) }}" method="POST" class="inline">
+                            <button type="button"
+                                    class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg text-xs sm:text-sm transition"
+                                    onclick="openDeleteModal({{ $member->id }})">
+                                Delete
+                            </button>
+                            <form id="deleteForm-{{ $member->id }}" 
+                                  action="{{ route('admin.members.destroy', $member->id) }}" 
+                                  method="POST" class="hidden">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit"
-                                        class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg text-xs sm:text-sm"
-                                        onclick="return confirm('Are you sure you want to delete this member?')">
-                                    Delete
-                                </button>
                             </form>
                         </td>
                     </tr>
@@ -71,4 +69,47 @@
         </a>
     </div>
 </div>
+
+<!-- Delete Confirmation Modal -->
+<div id="deleteModal" class="hidden fixed inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm z-50">
+    <div class="bg-white rounded-2xl shadow-xl max-w-sm w-full mx-4 p-6 text-center">
+        <h2 class="text-lg font-semibold text-gray-800 mb-2">Delete Member?</h2>
+        <p class="text-sm text-gray-600 mb-6">This action cannot be undone. Are you sure you want to delete this member?</p>
+        <div class="flex justify-center gap-3">
+            <button onclick="closeDeleteModal()" 
+                    class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-medium transition">
+                Cancel
+            </button>
+            <button id="confirmDeleteBtn" 
+                    class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition">
+                Delete
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let deleteMemberId = null;
+
+    function openDeleteModal(memberId) {
+        deleteMemberId = memberId;
+        document.getElementById('deleteModal').classList.remove('hidden');
+    }
+
+    function closeDeleteModal() {
+        deleteMemberId = null;
+        document.getElementById('deleteModal').classList.add('hidden');
+    }
+
+    document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+        if (deleteMemberId) {
+            document.getElementById('deleteForm-' + deleteMemberId).submit();
+        }
+    });
+
+    // Tutup modal jika user klik area luar modal
+    document.getElementById('deleteModal').addEventListener('click', function(e) {
+        if (e.target === this) closeDeleteModal();
+    });
+</script>
 @endsection

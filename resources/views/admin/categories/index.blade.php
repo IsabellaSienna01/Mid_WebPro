@@ -39,15 +39,11 @@
                                     class="inline-block bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded-lg text-sm w-full sm:w-auto">
                                 Edit
                             </button>
-                            <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST" class="inline w-full sm:w-auto">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" 
-                                        class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg text-sm w-full sm:w-auto"
-                                        onclick="return confirm('Are you sure you want to delete this category?')">
-                                    Delete
-                                </button>
-                            </form>
+                            <button type="button"
+                                    onclick="openDeleteModal({{ $category->id }})"
+                                    class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg text-sm w-full sm:w-auto">
+                                Delete
+                            </button>
                         </td>
                     </tr>
                 @empty
@@ -60,7 +56,7 @@
     </div>
 
     <!-- Add Category Modal -->
-    <div id="addCategoryModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 sm:p-6 hidden">
+    <div id="addCategoryModal" class="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 hidden">
         <div class="bg-white rounded-lg shadow-lg w-full sm:max-w-md p-4 sm:p-6 relative">
             <h2 class="text-lg sm:text-xl font-bold mb-4 text-emerald-600">Add Category</h2>
             <form action="{{ route('admin.categories.store') }}" method="POST">
@@ -87,7 +83,7 @@
     </div>
 
     <!-- Edit Category Modal -->
-    <div id="editCategoryModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 sm:p-6 hidden">
+    <div id="editCategoryModal" class="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 hidden">
         <div class="bg-white rounded-lg shadow-lg w-full sm:max-w-md p-4 sm:p-6 relative">
             <h2 class="text-lg sm:text-xl font-bold mb-4 text-emerald-600 ">Edit Category</h2>
             <form id="editCategoryForm" method="POST">
@@ -114,6 +110,29 @@
         </div>
     </div>
 
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteConfirmModal" class="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-sm p-6 text-center">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">Delete Confirmation</h2>
+            <p class="text-gray-600 mb-6">Are you sure you want to delete this category?</p>
+            <form id="deleteCategoryForm" method="POST">
+                @csrf
+                @method('DELETE')
+                <div class="flex justify-center gap-4">
+                    <button type="button" 
+                            onclick="document.getElementById('deleteConfirmModal').classList.add('hidden')"
+                            class="px-4 py-2 bg-gray-300 hover:bg-gray-400 text-gray-700 rounded-lg">
+                        Cancel
+                    </button>
+                    <button type="submit" 
+                            class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg">
+                        Delete
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <div class="mt-6">
         <a href="{{ route('admin.dashboard') }}" 
            class="bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-2 rounded-lg font-semibold shadow">
@@ -129,6 +148,11 @@ function openEditModal(id, name, description) {
     document.getElementById('editCategoryName').value = name;
     document.getElementById('editCategoryDescription').value = description;
     document.getElementById('editCategoryForm').action = '{{ route("admin.categories.update", ":id") }}'.replace(':id', id);
+}
+
+function openDeleteModal(id) {
+    document.getElementById('deleteConfirmModal').classList.remove('hidden');
+    document.getElementById('deleteCategoryForm').action = '{{ route("admin.categories.destroy", ":id") }}'.replace(':id', id);
 }
 </script>
 @endsection
