@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\BookController as AdminBookController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\LoanController;
+use App\Http\Controllers\Admin\BookRequestController as AdminBookRequestController;
 
 Route::get('/', [LandingController::class, 'index'])->name('landing.index');
 Route::get('/book-detail/{id}', [LandingController::class, 'detail'])->name('landing.detail');
@@ -50,6 +51,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::put('/books/{id}', [AdminBookController::class, 'update'])->name('books.update');
     Route::get('/books/{id}', [AdminBookController::class, 'show'])->name('books.show');
     Route::delete('/books/{id}', [AdminBookController::class, 'destroy'])->name('books.destroy');
+
+    Route::get('/request-book', [AdminBookRequestController::class, 'index'])->name('request-book.index');
+    Route::patch('/request-book/{bookRequest}', [AdminBookRequestController::class, 'update'])->name('request-book.update');
 
 
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
