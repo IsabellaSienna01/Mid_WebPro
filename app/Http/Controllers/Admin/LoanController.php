@@ -12,8 +12,8 @@ class LoanController extends Controller
     public function index()
     {
         $loans = Loan::with(['member.login', 'loanDetails.book', 'fines'])
-                     ->orderBy('loan_date', 'desc')
-                     ->paginate(20);
+                    ->orderBy('loan_date', 'desc')
+                    ->paginate(20);
 
         return view('admin.loans.index', compact('loans'));
     }
@@ -34,6 +34,6 @@ class LoanController extends Controller
         ]);
 
         return redirect()->route('admin.loans.index')
-                         ->with('success', 'Fine updated successfully.');
+                        ->with('success', 'Fine updated successfully.');
     }
 }

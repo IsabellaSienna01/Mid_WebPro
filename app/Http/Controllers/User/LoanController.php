@@ -30,7 +30,7 @@ class LoanController extends Controller
         $alreadyBorrowed = LoanDetail::where('book_id', $book->id)
             ->whereHas('loan', function ($query) use ($member) {
                 $query->where('member_id', $member->id)
-                      ->whereNull('return_date'); // artinya masih aktif
+                    ->whereNull('return_date');
             })
             ->exists();
 
