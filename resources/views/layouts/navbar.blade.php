@@ -65,6 +65,7 @@
                     <li><a href="{{ route ('admin.books') }}" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">Books</a></li>
                     <li><a href="{{ route('admin.members.index') }}" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">Members</a></li>
                     <li><a href="{{ route('admin.loans.index') }}" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">Borrows</a></li>
+                    <li><a href="{{ route('admin.request-book.index') }}" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3"></a>Book Requests</li>
                     <li>
                         <form method="POST" action="{{ route('logout') }}" class="inline">
                             @csrf
