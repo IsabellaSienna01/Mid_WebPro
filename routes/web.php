@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoanController;
 use App\Http\Controllers\User\BookController;
 use App\Http\Controllers\User\HistoryController;
 use App\Http\Controllers\User\ProfileController;
@@ -31,4 +32,9 @@ Route::middleware(['auth'])->prefix('user')->name('user.')->group(function () {
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('dashboard');
     Route::view('/books', 'admin.books.index')->name('books');
+});
+
+// ! error
+Route::middleware(['auth'])->prefix('user')->name('user.')->group(function () {
+    Route::post('/books/{id}', [LoanController::class, 'borrow'])->name('books.detail');
 });

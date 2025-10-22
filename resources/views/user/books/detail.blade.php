@@ -28,19 +28,46 @@
                 <div class="mt-4 space-y-2">
                     <p><span class="font-semibold text-gray-700">Category {{ $book->category->name ?? '-' }}</p>
                     <p><span class="font-semibold text-gray-700">Publication year:</span> {{ $book->year }}</p>
+                    <p>
+                        <span class="font-semibold text-gray-700">Status:</span>
+                        @if ($book->stock > 0)
+                            <span class="text-green-600 font-semibold">Available</span>
+                        @else
+                            <span class="text-red-500 font-semibold">Unavailable</span>
+                        @endif
+                    </p>
                     <p><span class="font-semibold text-gray-700">Description:</span></p>
-                    <p class="text-gray-600 text-sm leading-relaxed">{{ $book->description ?? 'Tidak ada deskripsi.' }}</p>
+                    <p class="text-gray-600 text-sm leading-relaxed">{{ $book->description ?? '-' }}</p>
                 </div>
             </div>
 
             <div class="mt-8">
                 @auth
-                    <form action="#" method="POST">
-                        @csrf
-                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition duration-200">
-                            Borrow this book
+                    @if ($book->stock > 0)
+                        <form action="#" method="POST">
+                            @csrf
+                            <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-2 rounded-lg transition duration-200">
+                                Borrow this book
+                            </button>
+                        </form>
+                        
+                        @if (session('success'))
+                            <div class="bg-green-100 text-green-700 p-3 rounded mb-4">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        @if (session('error'))
+                            <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+
+                    @else
+                        <button type="button" disabled class="w-full bg-gray-400 cursor-not-allowed text-white font-semibold py-2 rounded-lg transition duration-200">
+                            Currently Unavailable
                         </button>
-                    </form>
+                    @endif
                 @else
                     <a href="{{ route('login') }}" class="block w-full p-5 bg-gray-400 hover:bg-gray-500 text-white font-semibold py-2 rounded-lg transition">
                         Login to borrow this book
