@@ -65,7 +65,7 @@
                     <li><a href="{{ route ('admin.books') }}" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">Books</a></li>
                     <li><a href="{{ route('admin.members.index') }}" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">Members</a></li>
                     <li><a href="{{ route('admin.loans.index') }}" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">Borrows</a></li>
-                    <li><a href="{{ route('admin.request-book.index') }}" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3"></a>Book Requests</li>
+                    <li><a href="{{ route('admin.request-book.index') }}" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">Book Requests</a></li>
                     <li>
                         <form method="POST" action="{{ route('logout') }}" class="inline">
                             @csrf
@@ -80,10 +80,10 @@
 
         @guest
             <div class="flex flex-col md:flex-row md:items-center md:space-x-4">
-                <a href="{{ url('/login') }}" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3 text-center">
+                <a href="{{ route('login') }}" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3 text-center">
                     Login
                 </a>
-                <a href="{{ url('/register') }}" class="bg-emerald-500 text-white px-3 py-1 rounded hover:bg-emerald-600 text-sm font-semibold mx-3 text-center">
+                <a href="{{ route('register') }}" class="bg-emerald-500 text-white px-3 py-1 rounded hover:bg-emerald-600 text-sm font-semibold mx-3 text-center">
                     Register
                 </a>
             </div>
