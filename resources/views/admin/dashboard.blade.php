@@ -9,7 +9,7 @@
             Welcome back, {{ Auth::user()->name }}
         </h1>
         <p class="text-gray-600 mt-1 sm:mt-2 text-sm sm:text-base">
-            Here’s an overview of the library’s current status.
+            Here's an overview of the library's current status.
         </p>
     </div>
 
@@ -61,11 +61,9 @@
                             {{ $activity->member->login->name ?? '-' }}
                         </td>
                         <td class="p-2 sm:p-3">
-                            @foreach ($activity->loanDetails as $detail)
-                                <div class="text-gray-700 text-xs sm:text-sm">
-                                    {{ $detail->book->title ?? '-' }}
-                                </div>
-                            @endforeach
+                            <div class="text-gray-700 text-xs sm:text-sm">
+                                {{ $activity->loanDetails->book->title ?? '-' }}
+                            </div>
                         </td>
                         <td class="p-2 sm:p-3 text-gray-700">
                             {{ $activity->loan_date->format('d M Y') }}

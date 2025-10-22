@@ -6,9 +6,8 @@
 
     <div class="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
         <h1 class="text-xl sm:text-2xl font-bold text-gray-800">Borrow Records</h1>
-        <a href="{{ route('admin.dashboard') }}" 
-           class="bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-2 rounded-lg font-semibold shadow text-sm sm:text-base">
-           Back to Dashboard
+        <a href="{{ route('admin.dashboard') }}" class="bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-2 rounded-lg font-semibold shadow text-sm sm:text-base">
+            Back to Dashboard
         </a>
     </div>
 
@@ -38,9 +37,7 @@
                     <tr class="border-b hover:bg-gray-50">
                         <td class="px-4 py-3 font-medium">{{ $loan->member->login->name ?? '-' }}</td>
                         <td class="px-4 py-3">
-                            @foreach($loan->loanDetails as $detail)
-                                <div class="text-gray-700">{{ $detail->book->title ?? '-' }} (x{{ $detail->quantity }})</div>
-                            @endforeach
+                            <div class="text-gray-700">{{ $loan->loanDetails->book->title ?? '-' }}</div>
                         </td>
                         <td class="px-4 py-3 text-gray-700">{{ $loan->loan_date->format('d M Y') }}</td>
                         <td class="px-4 py-3 text-gray-700">{{ $loan->due_date->format('d M Y') }}</td>
@@ -64,7 +61,7 @@
                                 $allPaid = $loan->fines->every(fn($fine) => $fine->paid);
                             @endphp
                             <span class="px-2 py-1 text-xs sm:text-sm rounded-xl 
-                                  {{ $allPaid ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
+                                {{ $allPaid ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
                                 {{ $allPaid ? 'Yes' : 'No' }}
                             </span>
                         </td>
