@@ -33,7 +33,7 @@
             @enderror
 
             <button type="submit" class="w-full bg-emerald-500 text-white py-2 rounded-lg hover:bg-emerald-600 transition">
-                Masuk
+                Login
             </button>
         </form>
 

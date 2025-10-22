@@ -16,6 +16,6 @@ class LandingController extends Controller
     public function detail($id)
     {
         $book = Book::findOrFail($id);
-        return view('user.books.detail', compact('book'));
+        return view('landing.detail', compact('book'));
     }
 }

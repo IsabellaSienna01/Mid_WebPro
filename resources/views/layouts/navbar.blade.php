@@ -1,5 +1,9 @@
 <nav id="navbar" class="fixed top-0 left-0 w-full bg-white shadow-md p-4 flex justify-between items-center transition-transform duration-300 z-50">
-    <h1 class="text-2xl font-bold text-emerald-500">Libry</h1>
+    <h1 class="text-2xl font-bold text-emerald-500">
+        <a href="#" class="hover:underline">
+            Libry
+        </a>
+    </h1>
     
     @auth
         @if (Auth::user()->role === 'user')
@@ -44,22 +48,32 @@
         </ul>
 
         @elseif (Auth::user()->role === 'admin')
-        <ul class="flex space-x-6 text-lg">
-            <li><a href="/" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">
+        <ul class="flex space-x-6 text-lg pr-6">
+            <li><a href="{{ route ('admin.dashboard') }} " class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">
                 Dashboard
             </a></li>
-            <li><a href="/" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">
+            <li><a href="{{ route ('admin.categories.index') }}" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">
                 Categories
             </a></li>
-            <li><a href="/" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">
+            <li><a href="{{ route ('admin.books') }}" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">
                 Books
             </a></li>
-            <li><a href="/" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">
-                Borrows
-            </a></li>
-            <li><a href="/" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">
+            <li><a href="{{ route('admin.members.index') }}" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">
                 Members
             </a></li>
+            <li><a href="#" class="text-sm font-semibold text-gray-700 hover:text-emerald-500 mx-3">
+                Borrows
+            </a></li>
+
+            <li>
+            <form method="POST" action="{{ route('logout') }}" class="inline">
+            @csrf
+            <button type="submit"
+                class="text-sm font-semibold text-gray-700 hover:text-emerald-500 focus:outline-none">
+                Logout
+            </button>
+            </form>
+            </li>
         </ul>
         @endif
     @endauth

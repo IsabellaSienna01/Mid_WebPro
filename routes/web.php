@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\User\RequestController;
+use App\Http\Controllers\User\BookDetailController;
+use App\Http\Controllers\User\LoanController as UserLoan;
 use App\Http\Controllers\User\BookController;
 use App\Http\Controllers\User\HistoryController;
 use App\Http\Controllers\User\ProfileController;
@@ -10,7 +13,7 @@ use App\Http\Controllers\User\DashboardController as UserDashboard;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 
 Route::get('/', [LandingController::class, 'index'])->name('landing.index');
-Route::get('/books/{id}', [LandingController::class, 'detail'])->name('landing.detail');
+Route::get('/book-detail/{id}', [LandingController::class, 'detail'])->name('landing.detail');
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
@@ -23,9 +26,13 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->prefix('user')->name('user.')->group(function () {
     Route::get('/dashboard', [UserDashboard::class, 'index'])->name('dashboard');
     Route::get('/books', [BookController::class, 'index'])->name('books.index');
-    Route::get('/books/{id}', [UserDashboard::class, 'detail'])->name('books.detail');
+    Route::get('/book-detail/{id}', [BookDetailController::class, 'detail'])->name('book.detail');
+    Route::post('/book-detail/{id}', [UserLoan::class, 'borrow'])->name('book.borrow');
     Route::get('/histories', [HistoryController::class, 'index'])->name('histories');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::get('/request-book', [RequestController::class, 'index'])->name('book.request');
+    Route::post('/request-book', [RequestController::class, 'store'])->name('book.request.store');
+    Route::put('/book-detail/{id}', [UserLoan::class, 'return'])->name('book.return');
 });
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {

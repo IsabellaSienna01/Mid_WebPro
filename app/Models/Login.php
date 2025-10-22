@@ -19,4 +19,9 @@ class Login extends Model implements AuthenticatableContract
 
     protected $hidden = ['password'];
     protected $casts = ['logged_in' => 'boolean'];
+
+    public function member()
+    {
+        return $this->hasOne(Member::class, 'user_id', 'id');
+    }
 }

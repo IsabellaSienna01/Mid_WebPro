@@ -29,53 +29,54 @@
             @csrf
 
             <div>
-                <label for="name" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
-                <input type="text" id="name" name="name" value="{{ old('name') }}"
-                    required autofocus
-                    class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-200 focus:outline-none">
+                <label for="name" class="block text-sm font-medium text-gray-700">
+                    Full Name
+                </label>
+                <input type="text" id="name" name="name" value="{{ old('name') }}"required autofocus class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-200 focus:outline-none">
             </div>
 
             <div>
-                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                <input type="email" id="email" name="email" value="{{ old('email') }}"
-                    required
-                    class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-200 focus:outline-none">
+                <label for="email" class="block text-sm font-medium text-gray-700">
+                    Email
+                </label>
+                <input type="email" id="email" name="email" value="{{ old('email') }}" required class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-200 focus:outline-none">
             </div>
 
             <div>
-                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                <input type="password" id="password" name="password"
-                    required
-                    class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-200 focus:outline-none">
+                <label for="password" class="block text-sm font-medium text-gray-700">
+                    Password
+                </label>
+                <input type="password" id="password" name="password" required class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-200 focus:outline-none">
             </div>
 
             <div>
-                <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Konfirmasi Password</label>
-                <input type="password" id="password_confirmation" name="password_confirmation"
-                    required
-                    class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-200 focus:outline-none">
+                <label for="password_confirmation" class="block text-sm font-medium text-gray-700">
+                    Confirm Password
+                </label>
+                <input type="password" id="password_confirmation" name="password_confirmation" required class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-200 focus:outline-none">
             </div>
 
-            <div class="border-t pt-4 mt-4">
-                <p class="text-sm text-gray-600 mb-2">Informasi tambahan (opsional)</p>
+            <div class="border-t border-gray-300 pt-4 mt-4">
+                <p class="text-sm text-gray-600 mb-2">Additional Information (optional)</p>
 
                 <div>
-                    <label for="address" class="block text-sm font-medium text-gray-700">Alamat</label>
-                    <input type="text" id="address" name="address" value="{{ old('address') }}"
-                        class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-200 focus:outline-none">
+                    <label for="address" class="block text-sm font-medium text-gray-700">
+                        Address
+                    </label>
+                    <input type="text" id="address" name="address" value="{{ old('address') }}" class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-200 focus:outline-none">
                 </div>
 
                 <div>
-                    <label for="phone" class="block text-sm font-medium text-gray-700">Nomor Telepon</label>
-                    <input type="text" id="phone" name="phone" value="{{ old('phone') }}"
-                        class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-200 focus:outline-none">
+                    <label for="phone" class="block text-sm font-medium text-gray-700">
+                        Phone Number
+                    </label>
+                    <input type="text" id="phone" name="phone" value="{{ old('phone') }}" class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-200 focus:outline-none">
                 </div>
             </div>
 
             <div class="pt-2">
-                <button type="submit"
-                    class="w-full bg-emerald-500 text-white py-2 rounded-lg hover:bg-emerald-600 transition">
-                    Daftar
+                <button type="submit" class="w-full bg-emerald-500 text-white py-2 rounded-lg hover:bg-emerald-600 transition">
+                    Register
                 </button>
             </div>
         </form>
