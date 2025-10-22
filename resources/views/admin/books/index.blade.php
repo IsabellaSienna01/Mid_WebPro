@@ -57,16 +57,11 @@
                                class="inline-block bg-blue-400 hover:bg-blue-500 text-white px-3 py-1 rounded-lg text-xs sm:text-sm whitespace-nowrap">
                                 Details
                             </a>
-                            <form action="{{ route('admin.books.destroy', $book->id) }}" 
-                                  method="POST" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" 
-                                    class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg text-xs sm:text-sm whitespace-nowrap"
-                                    onclick="return confirm('Are you sure you want to delete this book?')">
-                                    Delete
-                                </button>
-                            </form>
+                            <button type="button" 
+                                onclick="openDeleteModal({{ $book->id }})"
+                                class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg text-xs sm:text-sm whitespace-nowrap">
+                                Delete
+                            </button>
                         </td>
                     </tr>
                 @empty
@@ -89,4 +84,36 @@
         </a>
     </div>
 </div>
+
+<!-- Delete Confirmation Modal -->
+<div id="deleteBookModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-lg shadow-lg w-full sm:max-w-sm p-6 text-center">
+        <h2 class="text-lg font-semibold text-gray-800 mb-4">Delete Confirmation</h2>
+        <p class="text-gray-600 mb-6">Are you sure you want to delete this book?</p>
+        <form id="deleteBookForm" method="POST">
+            @csrf
+            @method('DELETE')
+            <div class="flex flex-col sm:flex-row justify-center gap-3">
+                <button type="button"
+                    onclick="document.getElementById('deleteBookModal').classList.add('hidden')"
+                    class="px-4 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 rounded-lg w-full sm:w-auto">
+                    Cancel
+                </button>
+                <button type="submit"
+                    class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg w-full sm:w-auto">
+                    Delete
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function openDeleteModal(id) {
+    const modal = document.getElementById('deleteBookModal');
+    const form = document.getElementById('deleteBookForm');
+    form.action = '{{ route("admin.books.destroy", ":id") }}'.replace(':id', id);
+    modal.classList.remove('hidden');
+}
+</script>
 @endsection

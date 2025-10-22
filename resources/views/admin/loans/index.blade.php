@@ -13,15 +13,15 @@
         <table class="w-full min-w-[800px] border-collapse text-sm sm:text-base">
             <thead class="bg-gray-100 text-gray-700">
                 <tr>
-                    <th class="px-4 py-3 text-left">Member</th>
-                    <th class="px-4 py-3 text-left">Books</th>
-                    <th class="px-4 py-3 text-left">Loan Date</th>
-                    <th class="px-4 py-3 text-left">Due Date</th>
-                    <th class="px-4 py-3 text-left">Return Date</th>
-                    <th class="px-4 py-3 text-left">Status</th>
-                    <th class="px-4 py-3 text-left">Total Fine</th>
-                    <th class="px-4 py-3 text-left">Paid?</th>
-                    <th class="px-4 py-3 text-left">Action</th>
+                    <th class="px-4 py-3 text-center">Member</th>
+                    <th class="px-4 py-3 text-center">Books</th>
+                    <th class="px-4 py-3 text-center">Loan Date</th>
+                    <th class="px-4 py-3 text-center">Due Date</th>
+                    <th class="px-4 py-3 text-center">Return Date</th>
+                    <th class="px-4 py-3 text-center">Status</th>
+                    <th class="px-4 py-3 text-center">Total Fine</th>
+                    <th class="px-4 py-3 text-center">Paid Status</th>
+                    <th class="px-4 py-3 text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,10 +31,10 @@
                         <td class="px-4 py-3">
                             <div class="text-gray-700">{{ $loan->loanDetails->book->title ?? '-' }}</div>
                         </td>
-                        <td class="px-4 py-3 text-gray-700">{{ $loan->loan_date->format('d M Y') }}</td>
-                        <td class="px-4 py-3 text-gray-700">{{ $loan->due_date->format('d M Y') }}</td>
-                        <td class="px-4 py-3 text-gray-700">{{ $loan->return_date ? $loan->return_date->format('d M Y') : '-' }}</td>
-                        <td class="px-4 py-3">
+                        <td class="px-4 py-3 text-gray-700 text-center">{{ $loan->loan_date->format('d M Y') }}</td>
+                        <td class="px-4 py-3 text-gray-700 text-center">{{ $loan->due_date->format('d M Y') }}</td>
+                        <td class="px-4 py-3 text-gray-700 text-center">{{ $loan->return_date ? $loan->return_date->format('d M Y') : '-' }}</td>
+                        <td class="px-4 py-3 text-center">
                             <span class="px-2 py-1 text-xs sm:text-sm rounded-xl
                                 @switch($loan->status)
                                     @case('borrowed') bg-yellow-100 text-yellow-700 @break
@@ -45,19 +45,19 @@
                                 {{ ucfirst($loan->status) ?? 'Unknown' }}
                             </span>
                         </td>
-                        <td class="px-4 py-3 text-gray-700">
+                        <td class="px-4 py-3 text-gray-700 text-center">
                             Rp.{{ number_format($loan->fines->sum('amount'), 2) }}
                         </td>
-                        <td class="px-4 py-3">
+                        <td class="px-4 py-3 text-center">
                             @php
                                 $allPaid = $loan->fines->every(fn($fine) => $fine->paid);
                             @endphp
                             <span class="px-2 py-1 text-xs sm:text-sm rounded-xl 
-                                {{ $allPaid ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
-                                {{ $allPaid ? 'Yes' : 'No' }}
+                                  {{ $allPaid ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
+                                {{ $allPaid ? 'Paid' : 'Unpaid' }}
                             </span>
                         </td>
-                        <td class="px-4 py-3">
+                        <td class="px-4 py-3 text-center">
                             @if($loan->fines->count())
                                 <a href="{{ route('admin.loans.edit', $loan->fines->first()->id) }}" 
                                 class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 rounded text-xs sm:text-sm whitespace-nowrap">

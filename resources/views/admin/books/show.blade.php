@@ -14,10 +14,10 @@
     <div class="bg-emerald-50 shadow-lg rounded-xl p-4 sm:p-6 border border-emerald-200">
         <div class="flex flex-col md:flex-row md:gap-6">
             @if($book->image)
-                <div class="md:w-1/3 flex justify-center items-center mb-4 md:mb-0">
-                    <img src="{{ asset('storage/' . $book->image) }}" 
+                <div class="flex justify-center items-center mb-4 md:mb-0">
+                    <img src="{{ asset('' . $book->image) }}" 
                          alt="{{ $book->title }}" 
-                         class="rounded-lg object-cover max-h-48 md:max-h-64 w-full border border-emerald-200">
+                         class="rounded-lg object-cover max-h-50 md:max-h-64 w-full border border-emerald-200">
                 </div>
             @endif
 
