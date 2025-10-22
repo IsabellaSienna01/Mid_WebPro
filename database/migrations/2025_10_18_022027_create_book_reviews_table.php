@@ -29,10 +29,6 @@ return new class extends Migration
         Schema::disableForeignKeyConstraints();
 
         Schema::dropIfExists('book_reviews');
-        Schema::dropIfExists('book_requests');
-        Schema::dropIfExists('books');
-        Schema::dropIfExists('categories');
-        Schema::dropIfExists('members');
 
         Schema::enableForeignKeyConstraints();
     }

@@ -76,7 +76,7 @@
         </form>
     @else
         <p class="mt-4 text-sm text-gray-600">
-            🔒 <a href="{{ route('login') }}" class="text-blue-600 hover:underline">Login</a> untuk memberikan ulasan.
+            <a href="{{ route('login') }}" class="text-blue-600 hover:underline">Login</a> untuk memberikan ulasan.
         </p>
     @endauth
 </div>
