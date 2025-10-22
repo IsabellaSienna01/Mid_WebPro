@@ -25,7 +25,7 @@ class UpdateLoanFines extends Command
                 $fine = $daysLate * $ratePerDay;
 
                 $loan->update([
-                    'status' => 'overdue',
+                    'status' => 'late',
                     'fine' => $fine,
                 ]);
 

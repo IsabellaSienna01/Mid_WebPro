@@ -15,6 +15,7 @@
                     <tr>
                         <th class="px-4 py-3">Loan Date</th>
                         <th class="px-4 py-3">Due Date</th>
+                        <th class="px-4 py-3">Return Date</th>
                         <th class="px-4 py-3">Books</th>
                         <th class="px-4 py-3">Status</th>
                         <th class="px-4 py-3">Fine</th>
@@ -23,8 +24,15 @@
                 <tbody class="text-gray-700 divide-y divide-gray-200">
                     @foreach ($loans as $loan)
                         <tr>
-                            <td class="px-4 py-3">{{ \Carbon\Carbon::parse($loan->loan_date)->format('d M Y') }}</td>
-                            <td class="px-4 py-3">{{ \Carbon\Carbon::parse($loan->due_date)->format('d M Y') }}</td>
+                            <td class="px-4 py-3">
+                                {{ \Carbon\Carbon::parse($loan->loan_date)->format('d M Y') }}
+                            </td>
+                            <td class="px-4 py-3">
+                                {{ \Carbon\Carbon::parse($loan->due_date)->format('d M Y') }}
+                            </td>
+                            <td class="px-4 py-3">
+                                {{ $loan->return_date ? \Carbon\Carbon::parse($loan->return_date)->format('d M Y') : '-' }}
+                            </td>
                             <td class="px-4 py-3">
                                 {{ $loan->loanDetails->book->title ?? 'Unknown Book' }}
                                 <span class="text-sm text-gray-500">x{{ $loan->loanDetails->quantity }}</span>
@@ -42,9 +50,13 @@
                             </td>
                             <td class="px-4 py-3">
                                 @if ($loan->fine > 0)
-                                    <span class="text-red-500 font-semibold">Rp {{ number_format($loan->fine, 0, ',', '.') }}</span>
+                                    <span class="text-red-500 font-semibold">
+                                        Rp {{ number_format($loan->fine, 0, ',', '.') }}
+                                    </span>
                                 @else
-                                    <span class="text-gray-500">-</span>
+                                    <span class="text-gray-500">
+                                        -
+                                    </span>
                                 @endif
                             </td>
                         </tr>

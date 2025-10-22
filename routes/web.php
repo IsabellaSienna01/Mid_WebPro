@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\RequestController;
 use App\Http\Controllers\User\BookDetailController;
 use App\Http\Controllers\User\LoanController as UserLoan;
 use App\Http\Controllers\User\BookController;
@@ -29,6 +30,9 @@ Route::middleware(['auth'])->prefix('user')->name('user.')->group(function () {
     Route::post('/book-detail/{id}', [UserLoan::class, 'borrow'])->name('book.borrow');
     Route::get('/histories', [HistoryController::class, 'index'])->name('histories');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::get('/request-book', [RequestController::class, 'index'])->name('book.request');
+    Route::post('/request-book', [RequestController::class, 'store'])->name('book.request.store');
+    Route::put('/book-detail/{id}', [UserLoan::class, 'return'])->name('book.return');
 });
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {

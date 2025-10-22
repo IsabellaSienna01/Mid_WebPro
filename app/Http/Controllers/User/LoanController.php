@@ -59,4 +59,24 @@ class LoanController extends Controller
 
         return back()->with('success', 'Book borrowed successfully!');
     }
+
+    public function return($id)
+    {
+        $loan = Loan::findOrFail($id);
+
+        if ($loan->member->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        if ($loan->return_date) {
+            return redirect()->back()->with('error', 'This book has already been returned.');
+        }
+
+        $loan->update([
+            'return_date' => Carbon::now(),
+            'status' => 'returned',
+        ]);
+
+        return redirect()->back()->with('success', 'Book returned successfully!');
+    }
 }
