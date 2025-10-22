@@ -34,7 +34,7 @@
                 <div class="bg-white p-4 rounded-2xl shadow hover:shadow-md transition">
                     <h3 class="text-lg font-semibold text-indigo-700">{{ $book->title }}</h3>
                     <p class="text-sm text-gray-600 mb-2">by {{ $book->author }}</p>
-                    <a href="{{ route('user.books.detail', $book->id) }}" class="text-sm text-blue-500 hover:underline">
+                    <a href="{{ route('user.book.detail', $book->id) }}" class="text-sm text-blue-500 hover:underline">
                         View Details
                     </a>
                 </div>

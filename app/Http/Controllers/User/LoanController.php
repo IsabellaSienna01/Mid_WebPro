@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Loan;
@@ -14,44 +15,44 @@ class LoanController extends Controller
     public function borrow(Request $request, $bookId)
     {
         $user = Auth::user();
+        $member = $user->member;
 
-        $member = $user->member ?? null;
         if (!$member) {
             return back()->with('error', 'You are not registered as a library member.');
         }
 
         $book = Book::findOrFail($bookId);
 
-        if ($book->stock <= 0) {
+        if ($book->stock < 1) {
             return back()->with('error', 'This book is currently unavailable.');
         }
 
-        $activeLoan = Loan::where('member_id', $member->id)
-            ->whereNull('return_date')
-            ->first();
+        $alreadyBorrowed = LoanDetail::where('book_id', $book->id)
+            ->whereHas('loan', function ($query) use ($member) {
+                $query->where('member_id', $member->id)
+                      ->whereNull('return_date'); // artinya masih aktif
+            })
+            ->exists();
 
-        if ($activeLoan) {
-            $alreadyBorrowed = $activeLoan->loanDetails()
-                ->where('book_id', $book->id)
-                ->exists();
-
-            if ($alreadyBorrowed) {
-                return back()->with('error', 'You already borrowed this book and have not returned it yet.');
-            }
+        if ($alreadyBorrowed) {
+            return back()->with('error', 'You have already borrowed this book and not yet returned it.');
         }
 
-        $loan = $activeLoan ?? Loan::create([
-            'member_id' => $member->id,
-            'loan_date' => Carbon::now(),
-            'due_date' => Carbon::now()->addDays(7),
-            'status' => 'borrowed',
-            'fine' => 0,
-        ]);
+        $loan = Loan::Create(
+            [
+                'member_id' => $member->id,
+                'return_date' => null,
+                'loan_date' => Carbon::now(),
+                'due_date' => Carbon::now()->addDays(7),
+                'status' => 'borrowed',
+                'fine' => 0
+            ]
+        );
 
         LoanDetail::create([
             'loan_id' => $loan->id,
             'book_id' => $book->id,
-            'quantity' => 1,
+            'quantity' => 1
         ]);
 
         $book->decrement('stock');

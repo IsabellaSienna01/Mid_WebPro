@@ -6,7 +6,7 @@
         
         <div class="relative p-6 bg-gray-100">
             <div class="absolute top-6 left-6">
-                <a href="{{ url()->previous() }}" class="inline-flex items-center text-sm text-gray-600 hover:text-emerald-500 transition">
+                <a href="{{ url('/user/books') }}" class="inline-flex items-center text-sm text-gray-600 hover:text-emerald-500 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                     </svg>
@@ -26,7 +26,7 @@
                 <p class="text-gray-500 mt-1">by <span class="font-semibold">{{ $book->author }}</span></p>
 
                 <div class="mt-4 space-y-2">
-                    <p><span class="font-semibold text-gray-700">Category {{ $book->category->name ?? '-' }}</p>
+                    <p><span class="font-semibold text-gray-700">Category: {{ $book->category->name ?? '-' }}</p>
                     <p><span class="font-semibold text-gray-700">Publication year:</span> {{ $book->year }}</p>
                     <p>
                         <span class="font-semibold text-gray-700">Status:</span>
@@ -44,13 +44,18 @@
             <div class="mt-8">
                 @auth
                     @if ($book->stock > 0)
-                        <form action="#" method="POST">
-                            @csrf
-                            <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-2 rounded-lg transition duration-200">
-                                Borrow this book
+                        @if ($alreadyBorrowed)
+                            <button type="button" disabled class="w-full bg-gray-400 text-white font-semibold py-2 rounded-lg cursor-not-allowed">
+                                Book Borrowed
                             </button>
-                        </form>
-                        
+                        @else
+                            <form action="{{ route('user.book.borrow', $book->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-2 rounded-lg transition duration-200">
+                                    Borrow this book
+                                </button>
+                            </form>
+                        @endif
                         @if (session('success'))
                             <div class="bg-green-100 text-green-700 p-3 rounded mb-4">
                                 {{ session('success') }}
