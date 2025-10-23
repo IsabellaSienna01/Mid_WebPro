@@ -4,18 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Category; // Pastikan ada model Category
+use App\Models\Category; 
 
 class CategoryController extends Controller
 {
-    // Menampilkan semua kategori
     public function index()
     {
         $categories = Category::all();
         return view('admin.categories.index', compact('categories'));
     }
 
-    // Menambah kategori baru
     public function store(Request $request)
     {
         $request->validate([
@@ -31,7 +29,6 @@ class CategoryController extends Controller
         return redirect()->route('admin.categories.index')->with('success', 'Category added successfully.');
     }
 
-    // Update kategori
     public function update(Request $request, Category $category)
     {
         $request->validate([
@@ -47,7 +44,6 @@ class CategoryController extends Controller
         return redirect()->route('admin.categories.index')->with('success', 'Category updated successfully.');
     }
 
-    // Hapus kategori
     public function destroy(Category $category)
     {
         $category->delete();
