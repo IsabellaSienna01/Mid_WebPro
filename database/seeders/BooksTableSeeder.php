@@ -22,7 +22,7 @@ class BooksTableSeeder extends Seeder
                 'stock' => 10,
                 'category_id' => 5, // Children
                 'description' => 'A fantasy story for young readers about the magical world of Harry Potter.',
-                'image' => 'storage/books/Harry_Potter_and_the_Sorcerers_S.webp',
+                'image' => 'harrypotter.jpg',
             ],
             [
                 'title' => 'The Great Gatsby',
@@ -32,7 +32,7 @@ class BooksTableSeeder extends Seeder
                 'stock' => 5,
                 'category_id' => 1,
                 'description' => 'Classic novel depicting life in 1920s America.',
-                'image' => 'storage/books/500px-The_Great_Gatsby_Cover_192.webp',
+                'image' => 'greatgatsby.webp',
             ],
             [
                 'title' => 'Sapiens: A Brief History of Humankind',
@@ -42,7 +42,7 @@ class BooksTableSeeder extends Seeder
                 'stock' => 8,
                 'category_id' => 2, 
                 'description' => 'History of humankind from ancient to modern times.',
-                'image' => 'storage/books/sapiens.webp',
+                'image' => 'sapiens.jpg',
             ],
             [
                 'title' => 'A Brief History of Time',
@@ -52,7 +52,7 @@ class BooksTableSeeder extends Seeder
                 'stock' => 6,
                 'category_id' => 3, 
                 'description' => 'Explains the fundamental concepts of cosmology for general readers.',
-                'image' => 'storage/books/a-brief-history-of-time.webp',
+                'image' => 'abriefhistorytime.jpg',
             ],
             [
                 'title' => 'The Diary of a Young Girl',
@@ -62,7 +62,7 @@ class BooksTableSeeder extends Seeder
                 'stock' => 4,
                 'category_id' => 4,
                 'description' => 'The diary of Anne Frank during the Holocaust.',
-                'image' => 'storage/books/Young_Girl.webp',
+                'image' => 'thediaryofayounggirl.jpg',
             ],
         ];
 
