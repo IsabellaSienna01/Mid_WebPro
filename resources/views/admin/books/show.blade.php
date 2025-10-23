@@ -15,7 +15,7 @@
         <div class="flex flex-col md:flex-row md:gap-6">
             @if($book->image)
                 <div class="flex justify-center items-center mb-4 md:mb-0">
-                    <img src="{{ asset('' . $book->image) }}" 
+                    <img src="{{ asset('storage/books/' . $book->image) }}" 
                          alt="{{ $book->title }}" 
                          class="rounded-lg object-cover max-h-50 md:max-h-64 w-full border border-emerald-200">
                 </div>
