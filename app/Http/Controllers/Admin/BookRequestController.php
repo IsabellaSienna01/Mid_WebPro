@@ -18,9 +18,6 @@ class BookRequestController extends Controller
         return view('admin.request-book', compact('requests'));
     }
 
-    /**
-     * Update status: expects input 'action' => 'approved'|'rejected'
-     */
     public function update(Request $request, BookRequest $bookRequest)
     {
         $action = $request->input('action');
@@ -31,16 +28,6 @@ class BookRequestController extends Controller
 
         $bookRequest->status = $action;
         $bookRequest->save();
-
-        // optional: jika ingin langsung menambahkan buku ke table books ketika approved
-        // if ($action === 'approved') {
-        //     Book::create([
-        //         'title' => $bookRequest->title,
-        //         'author' => $bookRequest->author,
-        //         'publisher' => $bookRequest->publisher,
-        //         // tambahkan field lain sesuai migration books (category_id, qty, etc.)
-        //     ]);
-        // }
 
         return back()->with('success', 'Request has been ' . $action . '.');
     }
