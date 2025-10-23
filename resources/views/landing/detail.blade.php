@@ -6,7 +6,7 @@
         
         <div class="relative p-6 bg-gray-100">
             <div class="absolute top-6 left-6">
-                <a href="{{ url('/') }}" class="inline-flex items-center text-sm text-gray-600 hover:text-emerald-500 transition">
+                <a href="{{ route('landing.index') }}" class="inline-flex items-center text-sm text-gray-600 hover:text-emerald-500 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                     </svg>
@@ -81,35 +81,5 @@
             </div>
         </div>
     </div>
-</div>
-
-<div class="max-w-5xl mx-auto mt-10 bg-white p-8 rounded-xl shadow-md">
-    <h2 class="text-xl font-bold mb-4 text-gray-800">💬 Ulasan Buku</h2>
-    @forelse($book->reviews as $review)
-        <div class="border-b border-gray-200 py-3">
-            <p class="font-semibold text-gray-700">{{ $review->user->name }}</p>
-            <p class="text-gray-600 text-sm mt-1">{{ $review->comment }}</p>
-            <p class="text-xs text-gray-400 mt-1">{{ $review->created_at->diffForHumans() }}</p>
-        </div>
-    @empty
-        <p class="text-gray-500">Belum ada ulasan untuk buku ini.</p>
-    @endforelse
-
-    @auth
-        <form action="{{ route('reviews.store', $book->id) }}" method="POST" class="mt-6">
-            @csrf
-            <textarea name="comment" rows="3" 
-                class="w-full border rounded-lg p-2 text-sm focus:ring focus:ring-blue-300" 
-                placeholder="Tulis ulasanmu..."></textarea>
-            <button type="submit" 
-                class="mt-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-lg">
-                Kirim Ulasan
-            </button>
-        </form>
-    @else
-        <p class="mt-4 text-sm text-gray-600">
-            <a href="{{ route('login') }}" class="text-blue-600 hover:underline">Login</a> untuk memberikan ulasan.
-        </p>
-    @endauth
 </div>
 @endsection

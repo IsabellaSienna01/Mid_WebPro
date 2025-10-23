@@ -20,7 +20,7 @@
             @endphp
 
             <img src="{{ $profilePic }}" alt="Profile Picture"
-                 class="w-32 h-32 rounded-full border-4 border-indigo-100 shadow mb-4 object-cover">
+                 class="w-32 h-32 rounded-full border-4 border-emerald-100 shadow mb-4 object-cover">
 
             <h2 class="text-2xl font-bold text-gray-800">{{ $user->name }}</h2>
             <p class="text-gray-500">{{ $user->email }}</p>
@@ -39,7 +39,7 @@
 
         <div class="text-center">
             <a href="{{ route('user.profile.edit') }}"
-               class="bg-indigo-600 text-white px-6 py-2 rounded-xl hover:bg-indigo-700 transition shadow">
+               class="bg-emerald-500 text-white px-6 py-2 rounded-xl hover:bg-emerald-600 transition shadow">
                 Edit Profile
             </a>
         </div>
