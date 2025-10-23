@@ -6,7 +6,7 @@
         
         <div class="relative p-6 bg-gray-100">
             <div class="absolute top-6 left-6">
-                <a href="{{ route('user.books.index') }}" class="inline-flex items-center text-sm text-gray-600 hover:text-emerald-500 transition">
+                <a href="{{ route('landing.index') }}" class="inline-flex items-center text-sm text-gray-600 hover:text-emerald-500 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                     </svg>
@@ -15,7 +15,7 @@
             </div>
 
             <div class="flex justify-center">
-                <img src="{{ asset('storage/books/' . $book->cover_image) }}" alt="{{ $book->title }}" class="rounded-xl w-72 h-96 object-cover shadow-md">
+                <img src="{{ asset('storage/books/' . $book->image) }}" alt="{{ $book->title }}" class="rounded-xl w-72 h-96 object-cover shadow-md">
             </div>
         </div>
 

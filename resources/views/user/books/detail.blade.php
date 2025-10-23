@@ -15,7 +15,7 @@
             </div>
 
             <div class="flex justify-center">
-                <img src="{{ asset('storage/books/' . $book->cover_image) }}" alt="{{ $book->title }}" class="rounded-xl w-72 h-96 object-cover shadow-md">
+                <img src="{{ asset('storage/books/' . $book->image) }}" alt="{{ $book->title }}" class="rounded-xl w-72 h-96 object-cover shadow-md">
             </div>
         </div>
 
