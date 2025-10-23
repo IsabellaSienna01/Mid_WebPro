@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BookRequest;
-use App\Models\Book; // optional
+use App\Models\Book;
 
 class BookRequestController extends Controller
 {
